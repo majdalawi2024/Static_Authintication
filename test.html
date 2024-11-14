@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circulating Supply</title>
+</head>
+<body>
+    <h1>Circulating Supply Value Option A</h1>
+    <p id="circulatingSupplyA">Loading...</p> <!-- Placeholder for the first option -->
+
+    <h1>Circulating Supply Value Option B</h1>
+    <p id="circulatingSupplyB">Loading...</p> <!-- Placeholder for the second option -->
+
+    <script>
+        // Function to fetch data from the API and display it
+        function fetchCirculatingSupply() {
+            fetch('https://palcoin.cash/api/circulating_supply.php')
+                .then(response => response.json()) // Parse the response as JSON
+                .then(data => {
+                    // Extract the circulatingSupply value from the response
+                    const circulatingSupply = data.circulatingSupply;
+
+                    // Display Option A with text and Option B with only the number
+                    document.getElementById('circulatingSupplyA').innerHTML = `The circulating supply is: <strong>${circulatingSupply}</strong>`;
+                    document.getElementById('circulatingSupplyB').innerHTML = `<strong>${circulatingSupply}</strong>`;
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    document.getElementById('circulatingSupplyA').innerHTML = 'Error loading data';
+                    document.getElementById('circulatingSupplyB').innerHTML = 'Error loading data';
+                });
+        }
+
+        // Call the function to fetch and display the data when the page loads
+        fetchCirculatingSupply();
+    </script>
+</body>
+</html>
